@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    background-color: white;
+}
+
+.content{
+    margin-top: 30px;
+    background-color: black;
+    color: white;
+    font-size: larger;
+    height: 100%;
+}
+
+.center-text{
+    /* color:white; */
+    text-align: center;
+}
+
+.paragraph{
+    font-size: medium;
+}

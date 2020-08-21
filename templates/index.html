@@ -1,1 +1,30 @@
 <!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href={{ url_for('static', filename='img/favicon.ico' )  }}>
+<link rel="stylesheet" href={{ url_for('static', filename='css/style.css' )  }}>
+<title>{{ title }}</title>
+{% block head %}
+  
+{% endblock head %}
+</head>
+<body>
+    <header>
+        {% block header %}
+      
+        {% endblock header %}
+  </header>
+
+    <div class="content">
+        {% block body %}
+
+        {% endblock body %}
+    </div>
+    
+    <footer>
+        {% block footer %}
+        
+        {% endblock footer %}
+    </footer>
+
+</body>
