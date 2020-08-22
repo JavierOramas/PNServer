@@ -24,3 +24,14 @@
 .paragraph{
     font-size: medium;
 }
+
+.service-card{
+    width: 50px;
+    background-color: whitesmoke;
+    margin: 10px;
+    display: inline-block;
+}
+
+.service-photo{
+    height: 40px;
+}

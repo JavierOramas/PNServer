@@ -3,4 +3,11 @@
 {% block body %}
   <h1 class="center-text">{{ content }}</h1>
   <h2 class="paragraph center-text">{{paragraph}}</h2>
+  <div class="services">
+    {% for name,path in services%}
+    <div class='service-card'>
+      <img src={{path}} alt={{name}} class="service-photo">
+    </div>
+    {% endfor %}
+  </div>
 {% endblock body %}
