@@ -29,7 +29,9 @@
     width: auto;
     height: 45px;
     background-color: whitesmoke;
+    margin: auto;
     margin: 10px;
+    /* display: inline-flex; */
     display: inline-flex;
     border-radius: 10px;
 }
@@ -51,4 +53,9 @@
 .center{
     margin: auto;
     width: 50%;
+}
+
+.services{
+    width: 40%;
+    align-items: center;
 }
