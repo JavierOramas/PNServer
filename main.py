@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from os import path,walk
-from scripts.get_ip import get_ip
+# from scripts.get_ip import get_ip
+from get_ip import get_ip
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def get_services():
             services.append((i[:i.find('.')],path.join(cp,i)))
     return services
 def debug():
-    return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+'), if you expected someting diferent than this erase cache in your web browser', services=get_services())
+    return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+'), if you expected someting diferent than this erase cache in your web browser', services=get_services(), header_title='Prime Networks Server')
 
 @app.route('/')
 def root():

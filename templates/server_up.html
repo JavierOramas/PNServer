@@ -1,5 +1,12 @@
 {% extends "index.html" %}
 
+{% block header %}
+  <div class="center header-title">
+    <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-debug center" alt="">
+    <h1 class="page-title center-text">{{header_title}}</h1>
+  </div>
+{% endblock header %}
+
 {% block body %}
   <h1 class="center-text">{{ content }}</h1>
   <h2 class="paragraph center-text">{{paragraph}}</h2>
