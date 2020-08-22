@@ -1,10 +1,15 @@
 from flask import Flask, render_template
+from os import path,walk
 
 app = Flask(__name__)
 
 @app.route('/debug')
 def get_services():
-    return [('emby','static/img/services/emby.png'),('shares','static/img/services/share.png')]
+    services = []
+    for cp,dir,files in walk('static/img/services'):
+        for i in files:
+            services.append((i[:i.find('.')],path.join(cp,i)))
+    return services
 def debug():
     return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running, if you expected someting diferent than this erase cache in your web browser', services=get_services())
 
