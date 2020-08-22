@@ -18,5 +18,8 @@ def debug():
 def root():
     return debug()
 
+#TODO Database to store users for the Machine
+#TODO Register new users in the database
+
 if __name__ == '__main__':
     app.run(debug=True,port=2357)

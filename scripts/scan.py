@@ -7,6 +7,7 @@ from scripts.get_ip import get_ip
 
 available_services = {}
 
+#TODO Add Plex, Kodi, SMB and FTP Shares
 def check_local_services(ip,services):
     
     #PNCmdr
@@ -31,7 +32,8 @@ def check_local_services(ip,services):
         dump(available_services, json_file)   
     
     return available_services
-    
+
+#TODO Test network Scan    
 def check_network_machines(ip,services):
     # ip = get_ip()
     all_services = check_local_services(ip, services)
