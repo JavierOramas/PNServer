@@ -4,11 +4,17 @@
     padding: 0;
 }
 
+body{
+    width: initial;
+    height: initial;
+}
+
 .header{
     background-color: white;
 }
 
 .content{
+    margin-top: 5px;
     background-color: black;
     color: white;
     font-size: larger;
@@ -85,4 +91,11 @@ header{
     width: auto;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.blank-space{
+    height: inherit;
+    align-content: center;
+    align-items: center;
+    width: fit-content;
 }

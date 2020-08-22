@@ -10,6 +10,10 @@
 {% block body %}
   <h1 class="center-text">{{ content }}</h1>
   <h2 class="paragraph center-text">{{paragraph}}</h2>
+  
+  <div class='blank-space center'>
+    <img src={{ url_for('static', filename='img/logo.png' )  }} class="center" style="height: inherit; width: auto; margin:auto" alt="">  
+  </div>
   <div class="center services">
 
     {% for name,path in services%}
