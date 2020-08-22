@@ -39,7 +39,7 @@ def check_network_machines(ip,services):
     for i in range(1,256):
         if i == int(ip[-1]):
             continue
-        r = requests.get('http://'+ip[0]+'.'+ip[1].+ip[2]+'.'+str(i)+':2357/services')
+        r = requests.get('http://'+ip[0]+'.'+ip[1]+'.'+ip[2]+'.'+str(i)+':2357/services')
         if r.status_code == 200:
             new_services = json.loads(r.text)
             for i in new_services:
