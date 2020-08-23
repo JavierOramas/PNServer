@@ -3,6 +3,7 @@ from os import path,walk
 # from scripts.get_ip import get_ip
 from get_ip import get_ip
 from scan import load_services
+from flask_sqlalchemy import sqlalchemy
 
 app = Flask(__name__)
 
