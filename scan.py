@@ -23,15 +23,15 @@ def check_local_services(ip,services):
     #Temp Monitor api
     try:
         r = requests.get(str('http://'+ip+':'+services['temp_monitor_api'])).text
-        if r.find('temp_monitor_api'):
-            available_services['emby'] = [str('http://'+ip+':'+services['temp_momitor_api'])]
+        if not r.find('temp_monitor_api') == -1:
+            available_services['temp_monitor_api'] = [str('http://'+ip+':'+services['temp_monitor_api'])]
     except:
         pass
     #Temp Monitor webui
     try:
         r = requests.get(str('http://'+ip+':'+services['temp_monitor'])).text
         if r.find('temp_monitor'):
-            available_services['emby'] = [str('http://'+ip+':'+services['temp_momitor'])]
+            available_services['temp_monitor'] = [str('http://'+ip+':'+services['temp_monitor'])]
     except:
         pass
     
