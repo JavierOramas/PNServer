@@ -137,3 +137,36 @@ footer{
     min-width: 500px;
     width: fit-content;
 }
+
+.button{
+    padding: 3px;
+    margin: 5px;
+    background-color: darkgrey;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button:hover{
+    padding: 3px;
+    margin: 5px;
+    background-color:dimgrey;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button:active{
+    padding: 3px;
+    margin: 5px;
+    background-color:grey;
+    border-radius: 5px;
+    text-decoration: none;
+    color:azure;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}

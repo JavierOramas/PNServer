@@ -15,7 +15,7 @@ def get_services():
 
 @app.route('/debug')
 def debug():
-    return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+'), if you expected someting diferent than this erase cache in your web browser', services=get_services(), header_title='Prime Networks Server')
+    return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+')', services=get_services(), header_title='Prime Networks Server')
 
 @app.route('/')
 def root():
