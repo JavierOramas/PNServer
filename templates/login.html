@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href={{ url_for('static', filename='img/favicon.ico' )  }}>
+<link rel="stylesheet" href={{ url_for('static', filename='css/style.css' )  }}>
+<title>Login/Register</title>
+</head>
+
+<body class="center login-page">
+    <header>
+
+    </header>
+    
+    <div class="login-box">
+        <h1 style="width: 70%; margin: auto;", class="center-text">Login or Register</h1>
+        
+        <form method="POST" class="center">
+            <input type="text" class="login-usr center input">
+            <input type="password" class="login-pwd center input">
+            <button type="submit" class="center input">Login/ Register</button>
+        </form>
+    </div>
+
+    <sub id='note-login'>
+        If You have a valid User in the database you will be loged in, if you dont, 
+        you will be registered and you'll get guest acces to the services, for better 
+        you'll need to be Promoted by an admin. Thanks for using Prime Networks! 
+    </sub>
+
+    
+    <footer>
+    </footer>
+
+</body>

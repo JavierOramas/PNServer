@@ -99,3 +99,41 @@ header{
     align-items: center;
     width: fit-content;
 }
+
+.login-page{
+    margin-top: 100px;
+    width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+
+input, .input{
+    display: block;
+    margin: auto;
+    width: 100%;
+    min-width: 200px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+#note-login{
+    width: 40%;
+}
+
+footer{
+    width: initial;
+    background-color: darkslategray;
+    color: white;
+}
+
+.login-box{
+    margin: auto;
+    margin-top: 10%;
+    border: 2px ;
+    border-style: ridge;
+    border-color: black;
+    align-self: center;
+    align-items: center;
+    min-width: 500px;
+    width: fit-content;
+}

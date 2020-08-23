@@ -26,6 +26,10 @@ def root():
 def scan_network():
     return load_services()
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 
 #TODO Database to store users for the Machine
 #TODO Register new users in the database
