@@ -20,6 +20,7 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     pwd = db.Column(db.String(80), nullable=False)
+    # acces = db.Column(db.)
     # email = db.Column(db.String(30))
     
 
@@ -47,22 +48,27 @@ def scan_network():
 def return_active_services():
     return check_local_services()
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        user = Users.query.filter_by(name=request.form['username']).first()
+        print(user.name)
+        if user and check_password_hash( user.pwd, request.form['password']):
+            return str("Wellcome "+str(user.name))
+        else:
+            return "Try Angain"
+    return render_template('login.html', action='/login')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
     if request.method == 'POST':
-        print(dict(request.form))
-        print(request.form["username"])
         ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
         new_user = Users(name=request.form["username"], pwd=ciphered_pwd)
         db.session.add(new_user)
         db.session.commit()
         return 'user Registered'
     # if request.method == 'GET':
-    return render_template('login.html')
+    return render_template('login.html', action='/register')
 #TODO Database to store users for the Machine
 #TODO Register new users in the database
 
