@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+
+{% block header %}
+
+<nav class="nav toolbar navbar-expand-lg navbar-dark bg-dark">
+    
+    
+    <li class="navbar-brand" style="margin: 3px;">
+        <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-small" alt="">
+    </li>
+    
+    <div class="collapse navbar-collapse text-white">
+        <ul class='navbar-nav mr-auto'>
+            <li class="nav-item" >
+                <a class="nav-link active" href="#">Usuarios</a>
+            </li>
+            
+            <li class="nav-item" >
+                <a class="nav-link " href="#">Serivcios</a>
+            </li>
+            
+        </ul>
+
+        <ul class='navbar-nav mr-auto'>
+            <li class="nav-item justify-content-around"> 
+                <h1 class="text-center text-white center">{{header_title}}</h1>
+            </li>
+        </ul>
+
+        {% if login == False%}
+            <li class="nav-item my-2 my-lg-0" style="margin: 3px;">
+                <a class="nav-link btn btn-outline-secondary" href="/login">Login/Register</a>
+            </li>
+        {% endif %}
+        {% if login == True %}
+            <li class="nav-item my-2 my-lg-0" style="margin: 3px;">
+                <img src={{ url_for('static', filename='img/avatar.png' )  }} class="logo-small" alt={{ user }}>
+                <!-- <a class="nav-link btn btn-outline-secondary" href="/login">Login/Register</a> -->
+            </li>
+        {% endif %}
+        
+    </div>
+
+</nav>
+
+{% endblock header %}
+  
+{% block body %}
+{% endblock body %}

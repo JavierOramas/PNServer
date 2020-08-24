@@ -14,15 +14,23 @@ dbdir = "sqlite:///"+ os.path.abspath(os.getcwd()) + "/database.db"
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# app.config["extend_existing"] = True
 db = SQLAlchemy(app)
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     pwd = db.Column(db.String(80), nullable=False)
-    # acces = db.Column(db.)
-    # email = db.Column(db.String(30))
-    
+    access_guest = db.Column(db.Boolean)
+    access_user = db.Column(db.Boolean)
+    access_admin = db.Column(db.Boolean)
+    access_superadmin = db.Column(db.Boolean)
+
+class services(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+    port = db.Column(db.String(5), unique=True, nullable=False)
+        
 
 def get_services():
     services = []
@@ -63,14 +71,18 @@ def login():
 def register_user():
     if request.method == 'POST':
         ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-        new_user = Users(name=request.form["username"], pwd=ciphered_pwd)
+        new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access_guest=True, access_user=False, access_admin=False, access_superadmin=False)
         db.session.add(new_user)
         db.session.commit()
         return 'user Registered'
     # if request.method == 'GET':
     return render_template('login.html', action='/register')
-#TODO Database to store users for the Machine
-#TODO Register new users in the database
+
+
+#TODO Check user access
+@app.route('/manage')
+def manage_page():
+    return render_template('manage.html', header_title='Manage', login='True', user='test')
 
 if __name__ == '__main__':
     db.create_all()
