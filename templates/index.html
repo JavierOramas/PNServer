@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <head>
-<meta charset="utf-8">
-<link rel="shortcut icon" href={{ url_for('static', filename='img/favicon.ico' )  }}>
-<link rel="stylesheet" href={{ url_for('static', filename='css/style.css' )  }}>
-<title>{{ title }}</title>
-{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrik-to-fit=no" >
+    <link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css' )  }}>
+    <script src={{ url_for('static', filename='js/bootstrap.min.js' )  }}></script>
+    <link rel="shortcut icon" href={{ url_for('static', filename='img/favicon.ico' )  }}>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/style.css' )  }}>
+    <title>{{ title }}</title>
+    {% block head %}
   
-{% endblock head %}
+    {% endblock head %}
 </head>
-<body>
-    <header>
+<body class="container-fluid">
+    <header class='navbar'>
         {% block header %}
         {% endblock header %}
   </header>
 
-    <div class="content">
+    <div class="content container-fluid">
         {% block body %}
 
         {% endblock body %}
     </div>
     
-    <footer>
+    <footer class='container-fluid'>
         {% block footer %}
         
         {% endblock footer %}

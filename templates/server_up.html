@@ -1,27 +1,27 @@
 {% extends "index.html" %}
 
 {% block header %}
-  <div class="center header-title">
-    <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-debug center" alt="">
-    <h1 class="page-title center-text">{{header_title}}</h1>
+<img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-small" alt="">
+  <div class="container page-header center">
+    <h1 class="text-center col">{{header_title}}</h1>
   </div>
   <div>
-    <a href="\login" class='button'> Login/Register</a>
+    <a href="\login" class='btn btn-secondary'> Login/Register</a>
   </div>
-{% endblock header %}
-
-{% block body %}
-  <h1 class="center-text">{{ content }}</h1>
-  <h2 class="paragraph center-text">{{paragraph}}</h2>
+  {% endblock header %}
   
-  <div class='blank-space center'>
-    <img src={{ url_for('static', filename='img/logo.png' )  }} class="center" style="height: inherit; width: auto; margin:auto" alt="">  
+  {% block body %}
+    <h1 class="text-center">{{ content }}</h1>
+    <h2 class="paragraph center-text">{{paragraph}}</h2>
+    
+  <div class='blank-space container'>
+    <img src={{ url_for('static', filename='img/logo.png' )  }} class="center" style="height: inherit; width: initial; margin:auto" alt="">  
   </div>
-  <div class="center services">
+  <div class="container-fluid row">
 
     {% for name,path in services%}
     
-    <div class='service-card'>
+    <div class='service-card container col'>
     
       <img src={{path}} alt={{name}} class="service-photo">
       <h3 class="service-name">{{name}}</h3>
