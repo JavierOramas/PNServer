@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from os import path,walk
 # from scripts.get_ip import get_ip
 from get_ip import get_ip
-from scan import load_services
+from scan import load_services, check_local_services, check_network_machines
 from flask_sqlalchemy import sqlalchemy
 
 app = Flask(__name__)
@@ -25,7 +25,11 @@ def root():
 #TODO return only the info corresponding to the acces of the User
 @app.route('/scan')
 def scan_network():
-    return load_services()
+    return check_network_machines()
+
+@app.route('/services')
+def return_active_services():
+    return check_local_services()
 
 @app.route('/login')
 def login():
