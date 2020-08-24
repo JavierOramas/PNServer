@@ -21,20 +21,21 @@
         </div>
     </header>
     
+    <!-- TODO interchange between login and register -->
     <div class="login-box center w-50">
         <h1 style="width: 70%; margin: auto;", class="text-center">Login or Register</h1>
         
-        <form method="POST">
+        <form method="POST" action="/register">
             <div class="form-group w-75 center"> 
                 <label for="username" class="sr-only">Username</label>
-                <input type="text" id='username' class="form-control" placeholder="Username">
+                <input type="text" id='username' name='username' class="form-control" placeholder="Username">
             </div>
             <div class="form-group w-75 center"> 
                 <label for="password" class="sr-only">Password</label>
-                <input type="password" id='password' class="form-control" placeholder="Password">
+                <input type="password" id='password' name='password' class="form-control" placeholder="Password">
             </div>
             <div class="form-group w-75 center"> 
-                <button type="submit" class="btn btn-primary btn-block ">Login/ Register</button>
+                <input type="submit" name='submit'class="btn btn-primary btn-block " value='Register'>
             </div>        
         </form>
     </div>
