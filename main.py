@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, escape, redirect
 from os import path,walk
 # from scripts.get_ip import get_ip
 from get_ip import get_ip
@@ -14,6 +14,7 @@ dbdir = "sqlite:///"+ os.path.abspath(os.getcwd()) + "/database.db"
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = dbdir
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key = '1232314341rdfamkpsva3k1fksapanwp3np3pma'
 # app.config["extend_existing"] = True
 db = SQLAlchemy(app)
 
@@ -26,11 +27,15 @@ class Users(db.Model):
     access_admin = db.Column(db.Boolean)
     access_superadmin = db.Column(db.Boolean)
 
-class services(db.Model):
+class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     port = db.Column(db.String(5), unique=True, nullable=False)
-        
+       
+class Properties(db.Model): 
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+    access = db.Column(db.Integer, nullable=False)
 
 def get_services():
     services = []
@@ -39,9 +44,32 @@ def get_services():
             services.append((i[:i.find('.')],path.join(cp,i)))
     return services
 
+#TODO return list with all the values of the table
+def get_data(property):
+    if property == 'users':
+        pass
+    if property == 'services':
+        pass
+    else:
+        pass
+    
+    return []
+
+def check_session():
+    print(session)
+    if 'username' in session:
+        return escape(session['username'])
+    else:
+        return None
+    
 @app.route('/debug')
 def debug():
-    return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+')', services=get_services(), header_title='Prime Networks Server')
+    print(session)
+    if 'username' in session:
+        user = escape(session['username'])
+    else:
+        user = None
+    return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+')', user=user ,services=get_services(), header_title='Prime Networks Server')
 
 @app.route('/')
 def root():
@@ -60,12 +88,15 @@ def return_active_services():
 def login():
     if request.method == 'POST':
         user = Users.query.filter_by(name=request.form['username']).first()
-        print(user.name)
         if user and check_password_hash( user.pwd, request.form['password']):
-            return str("Wellcome "+str(user.name))
+            session['username'] = user.name
+            # print(session)
+            # return str("Wellcome "+str(user.name))
+            return redirect('/')
         else:
             return "Try Angain"
     return render_template('login.html', action='/login')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
@@ -81,9 +112,14 @@ def register_user():
 
 #TODO Check user access
 @app.route('/manage')
-def manage_page():
-    return render_template('manage.html', header_title='Manage', login='True', user='test')
+@app.route('/manage/users')
+def manage_page_users():
+    return render_template('manage.html', header_title='Manage Users', login='True', user='test', property='users', data=get_data('users'))
+
+@app.route('/manage/services')
+def manage_page_services():
+    return render_template('manage.html', header_title='Manage Services', login='True', user='test', property='services', data=get_data('services'))
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True,port=2357)
+    app.run(debug=True,host=get_ip(), port=2357)

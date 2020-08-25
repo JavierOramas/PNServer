@@ -12,11 +12,11 @@
     <div class="collapse navbar-collapse text-white">
         <ul class='navbar-nav mr-auto'>
             <li class="nav-item" >
-                <a class="nav-link active" href="#">Usuarios</a>
+                <a class="nav-link " href="/manage/users">Usuarios</a>
             </li>
             
             <li class="nav-item" >
-                <a class="nav-link " href="#">Serivcios</a>
+                <a class="nav-link " href="/manage/services">Serivcios</a>
             </li>
             
         </ul>
@@ -46,4 +46,22 @@
 {% endblock header %}
   
 {% block body %}
+    
+    <table>
+        <thead>
+            {{property}}
+        </thead>
+        <tbody>
+            {% for i in data%}
+                <tr>
+                    {% for j in i%}
+                        <td>
+                            j
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock body %}
