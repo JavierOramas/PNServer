@@ -88,26 +88,30 @@ def return_active_services():
 def login():
     if request.method == 'POST':
         user = Users.query.filter_by(name=request.form['username']).first()
-        if user and check_password_hash( user.pwd, request.form['password']):
+        if not user.name == '' and user and check_password_hash( user.pwd, request.form['password']):
             session['username'] = user.name
             # print(session)
             # return str("Wellcome "+str(user.name))
             return redirect('/')
         else:
-            return "Try Angain"
-    return render_template('login.html', action='/login')
+            return render_template('login.html', action='/login' , action_name='Login', oposite_action='/register', oposite_action_name='Register', warning=True)
+    
+    return render_template('login.html', action='/login' , action_name='Login', oposite_action='/register', oposite_action_name='Register', warning=False)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
     if request.method == 'POST':
-        ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-        new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access_guest=True, access_user=False, access_admin=False, access_superadmin=False)
-        db.session.add(new_user)
-        db.session.commit()
-        return 'user Registered'
+        try:
+            ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
+            new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access_guest=True, access_user=False, access_admin=False, access_superadmin=False)
+            db.session.add(new_user)
+            db.session.commit()
+            return 'user Registered'
+        except:
+            return render_template('login.html', action='/register', action_name='Register', oposite_action='/login', oposite_action_name='Login', warning=True)
     # if request.method == 'GET':
-    return render_template('login.html', action='/register')
+    return render_template('login.html', action='/register', action_name='Register', oposite_action='/login', oposite_action_name='Login', warning=False)
 
 
 #TODO Check user access
