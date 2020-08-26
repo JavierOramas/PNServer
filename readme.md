@@ -27,29 +27,29 @@ In a terminal type:
 <ul>
     <li>
     <p>
-    **PNCmdr**: Service Managing, only accessible for admins and superadmins of the server, Default Port: 2357
+    <b>PNCmdr</b>: Service Managing, only accessible for admins and superadmins of the server, Default Port: 2357
     <p>
     </li>
     <li>
     <p>
-    **Emby**: Media Center Software, this will give you easy access to your all media from any device, it allows to get information about TV Shows, Movies and Music, also 
-    can handle Home made photos and videos. For Better experience check their <a href='emby.org'>app</a>, Default Port: 8096
+    <b>Emby</b>: Media Center Software, this will give you easy access to your all media from any device, it allows to get information about TV Shows, Movies and Music, also 
+    can handle Home made photos and videos. For Better experience check their <a href='emby.org'>app</a>. Default Port: 8096
     <p>
     </li>
     <li>
     <p>
-    **SMB**: Easyly Share files across your machines, add users with diferent access privilegies to keep privacy and security
+    <b>SMB</b>: Easyly Share files across your machines, add users with diferent access privilegies to keep privacy and security
     </p>
     </li>
     <li>
     <p>
-    **FTP**: Easyly Share files across your machines, add users with diferent access privilegies to keep privacy and security
+    <b>FTP</b>: Easyly Share files across your machines, add users with diferent access privilegies to keep privacy and security. Default Port 20
     </p>
     </li>
     <li>
     <p>
-    **Temp Monitor**: Useful tool to keep track of temperatures on your system, you can contribute to this app <a href='https://www.github.com/JavierOramas/temp_monitor'>here</a></br>
-    Also is available an api and an iphone and android app, you can use the mobile version for this<a href='https://www.github.com/JavierOramas/temp_monitor_app'>here</a> </br>
+    <b>Temp Monitor</b>: Useful tool to keep track of temperatures on your system, you can contribute to this app <a href='https://www.github.com/JavierOramas/temp_monitor'>here</a></br>
+    Also is available an api and an iphone and android app, you can use the mobile version for this <a href='https://www.github.com/JavierOramas/temp_monitor_app'>here</a>. </br>
     Default Ports: 9999 (server), 9998 (app)
     </p>
     </li>
@@ -60,7 +60,7 @@ In a terminal type:
 You can also use this system from your phone, Android or Iphone <a href='https://www.github.com/JavierOramas/PNCmdr'>here</a> this is a Work in progress so there might be some errors and stuff, all contributions are wellcome
 
 ## Desktop/Web
-Our Mobile app is developed on Flutter, and soon many platforms such as web and linux Desktop will be supported, so.. <a href='https://www.github.com/JavierOramas/PNCmdr'>stay close</a>
+Our Mobile app is developed on Flutter, and soon many platforms such as web and linux Desktop will be supported, so... <a href='https://www.github.com/JavierOramas/PNCmdr'>stay close</a>
 The Web Managing interface is running with the server on the port 2357
 
 ## Licence
