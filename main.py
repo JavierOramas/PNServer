@@ -105,7 +105,7 @@ def return_active_services():
 def login():
     if request.method == 'POST':
         user = Users.query.filter_by(name=request.form['username']).first()
-        if not user.name == '' and user and check_password_hash( user.pwd, request.form['password']):
+        if user and not user.name == '' and check_password_hash( user.pwd, request.form['password']):
             session['username'] = user.name
             # print(session)
             # return str("Wellcome "+str(user.name))
