@@ -36,9 +36,19 @@ class Properties(db.Model):
 
 def get_services():
     services = []
+    services_db = Services.query.all()
+    columns = Services.__table__.columns
+    final_list = []
+    
+    for i in services_db:
+        final_list.append(i.name)
+        
     for cp,dir,files in walk('static/img/services'):
         for i in files:
-            services.append((i[:i.find('.')],path.join(cp,i)))
+            if i[:i.find('.')] in final_list:
+                services.append((i[:i.find('.')],path.join(cp,i)))
+    # print(services)
+    # print(final_list)
     return services
 
 #TODO return list with all the values of the table
