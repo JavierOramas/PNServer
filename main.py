@@ -22,11 +22,8 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     pwd = db.Column(db.String(80), nullable=False)
-    access_guest = db.Column(db.Boolean)
-    access_user = db.Column(db.Boolean)
-    access_admin = db.Column(db.Boolean)
-    access_superadmin = db.Column(db.Boolean)
-
+    access = db.Column(db.String(10), nullable=False)
+    
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
@@ -47,13 +44,23 @@ def get_services():
 #TODO return list with all the values of the table
 def get_data(property):
     if property == 'users':
-        pass
+        users = Users.query.all()
+        columns = Users.__table__.columns
+        final_list = []
+        for i in users:
+            final_list.append([i.id, i.name])
+        return final_list
     if property == 'services':
-        pass
+        services = Services.query.all()
+        columns = Services.__table__.columns
+        final_list = []
+        for i in services:
+            final_list.append([i.id, i.name, i.port])
+        return final_list
     else:
         pass
     
-    return []
+    return [[ 'emby', '8096'], ['PNCmdr', '2357']]
 
 def check_session():
     print(session)
@@ -78,7 +85,7 @@ def root():
 #TODO return only the info corresponding to the acces of the User
 @app.route('/scan')
 def scan_network():
-    return check_network_machines()
+    return check_network_machines(db)
 
 @app.route('/services')
 def return_active_services():
@@ -103,8 +110,9 @@ def login():
 def register_user():
     if request.method == 'POST':
         try:
+        # print(request.form["username"])
             ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-            new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access_guest=True, access_user=False, access_admin=False, access_superadmin=False)
+            new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access='guest')
             db.session.add(new_user)
             db.session.commit()
             return 'user Registered'
@@ -126,4 +134,6 @@ def manage_page_services():
 
 if __name__ == '__main__':
     db.create_all()
+    
+    os.popen("sass static/scss/style.scss:static/css/style.css")
     app.run(debug=True,host=get_ip(), port=2357)

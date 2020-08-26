@@ -47,21 +47,58 @@
   
 {% block body %}
     
-    <table>
-        <thead>
-            {{property}}
-        </thead>
-        <tbody>
-            {% for i in data%}
-                <tr>
+    <div class="container-fluid row">
+        <table class="col" style="margin: 5px; width:fit-content">
+            <tbody class="table table-responsive table-active bg-dark text-light text-white">
+                {% for i in data%}
+                <tr class="table text-white">
                     {% for j in i%}
-                        <td>
-                            j
-                        </td>
+                    <td class="manage-item">
+                        {{j}}
+                    </td>
                     {% endfor %}
+                    <td class='table text-white table-hover'>
+                        <!-- TODO make this select the entry to edit it -->
+                        <button class='btn btn-outline-secondary' onclick=''>
+                            edit 
+                        </button>
+                    </td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="col container">
+            {% if  property == 'users' %}
+                <form method="POST" class="form form-add-entry" >
+                    <input type="text" class="form-control" id='name' name="name">
+                    <input type="text" class="form-control" id='password' name="password">
+                    <input type="text" class="form-control" id='access' name="access">
+                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Create">
+                </form>
+                <form method="POST" class="form form-edit-entry" >
+                    <input type="text" class="form-control" id='name' name="name">
+                    <input type="text" class="form-control" id='password' name="password">
+                    <input type="text" class="form-control" id='access' name="access">
+                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Save">
+                </form>
+            {% endif %}
+            {% if  property == 'services' %}
+                <form method="POST" class="form form-add-entry" >
+                    <input type="text" class="form-control" id='name' name="name">
+                    <input type="text" class="form-control" id='port' name="port">
+                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Create">
+                </form>
+
+                <form method="POST" class="form form-edit-entry" >
+                    <input type="text" class="form-control" id='name' name="name">
+                    <input type="text" class="form-control" id='port' name="port">
+                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Save">
+                </form>
+            {% endif %}
+            
+        </div>
+    </div>
+
+
 
 {% endblock body %}

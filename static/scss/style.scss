@@ -1,0 +1,147 @@
+$default-text: sans-serif;
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: initial;
+    height: initial;
+}
+
+.header{
+    background-color: white;
+}
+
+.content{
+    margin-top: 5px;
+    background-color: black;
+    color: white;
+    font-size: larger;
+    height: 100%;
+}
+
+.center-text{
+    /* color:white; */
+    text-align: center;
+}
+
+.paragraph{
+    font-size: medium;
+}
+
+.service-card{
+    width: auto;
+    height: 45px;
+    background-color: whitesmoke;
+    margin: auto;
+    margin: 10px;
+    /* display: inline-flex; */
+    display: inline-flex;
+    border-radius: 10px;
+}
+
+.service-name{
+    margin-top: 10%;
+    color: black;
+    margin: 5px;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.service-photo{
+    height: 40px;
+    margin: 2px;
+    margin-left: 5px;
+}
+
+.center{
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    /* width: 50%; */
+}
+
+.services{
+    width: 40%;
+    align-items: center;
+}
+
+header{
+    height: max-content;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.page-title{
+    width: max-content;
+    margin: auto;
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo-small{
+    height: 50px;
+    width: 50px;
+    /* margin: 3px; */
+}
+
+.logo-medium{
+    height: 150px;
+    width: 150px;
+    /* margin: 3px; */
+}
+.header-title{
+    height: fit-content;
+    width: auto;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.blank-space{
+    height: inherit;
+    align-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.login-page{
+    margin-top: 100px;
+    width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+
+#note-login{
+    width: 40%;
+}
+
+footer{
+    /* background-color: black; */
+    color: white;
+}
+
+.login-box{
+    background-color: black;
+    margin: auto;
+    /* margin-top: 10%; */
+    border: 2px ;
+    border-style: ridge;
+    border-color: black;
+    align-self: center;
+    align-items: center;
+    /* min-width: 5px; */
+    width: max-content;
+    border-radius: 20px;
+}
+.login-box > h1{
+    color: whitesmoke;
+}
+
+/* .toolbar{
+    width: 100%;
+} */
