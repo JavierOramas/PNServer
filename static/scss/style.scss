@@ -34,6 +34,7 @@ body{
 
 .service-card{
     width: auto;
+    max-width: 75%;
     height: 45px;
     background-color: whitesmoke;
     margin: auto;
@@ -141,7 +142,3 @@ footer{
 .login-box > h1{
     color: whitesmoke;
 }
-
-/* .toolbar{
-    width: 100%;
-} */

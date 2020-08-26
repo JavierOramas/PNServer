@@ -27,15 +27,13 @@
   <div class='blank-space container'>
     <img src={{ url_for('static', filename='img/logo.png' )  }} class="center" style="height: inherit; width: initial; margin:auto" alt="">  
   </div>
-  <div class="container-fluid row">
+  <div class="container center row">
 
     {% for name,path in services%}
     
-    <div class='service-card container col'>
-    
-      <img src={{path}} alt={{name}} class="service-photo">
-      <h3 class="service-name">{{name}}</h3>
-    
+    <div class='service-card col'>
+        <img src={{path}} alt={{name}} class="service-photo">
+        <h3 class="service-name">{{name}}</h3>    
     </div>
 
     {% endfor %}
