@@ -60,7 +60,7 @@ In a terminal type:
 You can also use this system from your phone, Android or Iphone <a href='https://www.github.com/JavierOramas/PNCmdr'>here</a> this is a Work in progress so there might be some errors and stuff, all contributions are wellcome
 
 ## Desktop/Web
-Our Mobile app is developed on Flutter, and soon many platforms such as web and linux Desktop will be supported, so... <a href='https://www.github.com/JavierOramas/PNCmdr'>stay close</a>
+Our Mobile app is developed on Flutter, and soon many platforms such as web and linux Desktop will be supported, so... <a href='https://www.github.com/JavierOramas/PNCmdr'>stay close</a>. </br>
 The Web Managing interface is running with the server on the port 2357
 
 ## Licence
