@@ -22,17 +22,22 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     pwd = db.Column(db.String(80), nullable=False)
-    access = db.Column(db.String(10), nullable=False)
+    access_code = db.Column(db.String(5), unique=True, nullable=False)
+    access_name = db.Column(db.String(10), unique=True, nullable=False)
     
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     port = db.Column(db.String(5), unique=True, nullable=False)
+    access_code = db.Column(db.String(5), unique=True, nullable=False)
+    access_name = db.Column(db.String(10), unique=True, nullable=False)
        
 class Properties(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    access = db.Column(db.Integer, nullable=False)
+    access_code = db.Column(db.String(5), unique=True, nullable=False)
+    access_name = db.Column(db.String(10), unique=True, nullable=False)
+
 
 def get_services():
     services = []
@@ -102,35 +107,32 @@ def return_active_services():
     return check_local_services()
 
 @app.route('/login', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = Users.query.filter_by(name=request.form['username']).first()
-        if user and not user.name == '' and check_password_hash( user.pwd, request.form['password']):
-            session['username'] = user.name
-            # print(session)
-            # return str("Wellcome "+str(user.name))
-            return redirect('/')
+        print(request.form)
+        if request.form['submit'] == 'Login':
+            user = Users.query.filter_by(name=request.form['username']).first()
+            if user and not user.name == '' and check_password_hash( user.pwd, request.form['password']):
+                session['username'] = user.name
+                # print(session)
+                # return str("Wellcome "+str(user.name))
+                return redirect('/')
+            else:
+                return render_template('login.html', warning=True)
         else:
-            return render_template('login.html', action='/login' , action_name='Login', oposite_action='/register', oposite_action_name='Register', warning=True)
-    
-    return render_template('login.html', action='/login' , action_name='Login', oposite_action='/register', oposite_action_name='Register', warning=False)
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register_user():
-    if request.method == 'POST':
-        try:
-        # print(request.form["username"])
-            ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-            new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access='guest')
-            db.session.add(new_user)
-            db.session.commit()
-            return 'user Registered'
-        except:
-            return render_template('login.html', action='/register', action_name='Register', oposite_action='/login', oposite_action_name='Login', warning=True)
+            # print(request.form["username"])
+            try:
+                ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
+                new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access_name='guest', access_code=0)
+                db.session.add(new_user)
+                db.session.commit()
+                return 'user Registered'
+            except:
+                return render_template('login.html', warning=True)
     # if request.method == 'GET':
-    return render_template('login.html', action='/register', action_name='Register', oposite_action='/login', oposite_action_name='Login', warning=False)
-
+        
+    return render_template('login.html', warning=False)
 
 #TODO Check user access
 @app.route('/manage')
