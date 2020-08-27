@@ -69,30 +69,21 @@
         </table>
         <div class="col container">
             {% if  property == 'users' %}
-                <form method="POST" class="form form-add-entry" >
-                    <input type="text" class="form-control" id='name' name="name">
-                    <input type="text" class="form-control" id='password' name="password">
-                    <input type="text" class="form-control" id='access' name="access">
-                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Create">
-                </form>
                 <form method="POST" class="form form-edit-entry" >
                     <input type="text" class="form-control" id='name' name="name">
                     <input type="text" class="form-control" id='password' name="password">
-                    <input type="text" class="form-control" id='access' name="access">
-                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Save">
+                    <input type="text" class="form-control" id='access_name' name="access_name">
+                    <input type="submit" class="form-contol" id='sumbit' name="submit-user" value="Create">
+                    <input type="submit" class="form-contol" id='sumbit' name="submit-user" value="Save">
                 </form>
             {% endif %}
             {% if  property == 'services' %}
                 <form method="POST" class="form form-add-entry" >
                     <input type="text" class="form-control" id='name' name="name">
                     <input type="text" class="form-control" id='port' name="port">
-                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Create">
-                </form>
-
-                <form method="POST" class="form form-edit-entry" >
-                    <input type="text" class="form-control" id='name' name="name">
-                    <input type="text" class="form-control" id='port' name="port">
-                    <input type="submit" class="form-contol" id='sumbit' name="sumbit" value="Save">
+                    <input type="text" class="form-control" id='access_name' name="access_name">
+                    <input type="submit" class="form-contol" id='sumbit' name="submit-service" value="Create">
+                    <input type="submit" class="form-contol" id='sumbit' name="submit-service" value="Save">
                 </form>
             {% endif %}
             

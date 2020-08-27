@@ -17,6 +17,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = '1232314341rdfamkpsva3k1fksapanwp3np3pma'
 # app.config["extend_existing"] = True
 db = SQLAlchemy(app)
+access = {
+    'guest':0,
+    'user':1,
+    'admin':2,
+    'super admin':3 
+}
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -135,13 +141,33 @@ def login():
     return render_template('login.html', warning=False)
 
 #TODO Check user access
-@app.route('/manage')
-@app.route('/manage/users')
+@app.route('/manage', methods=['GET', 'POST'])
+@app.route('/manage/users' , methods=['GET', 'POST'])
 def manage_page_users():
+    if request.method == 'POST':
+        if request.form['submit-user'] == 'Create':
+            try:
+                ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
+                new_user = Users(name=request.form["name"], pwd=ciphered_pwd, access_name=request.form['access_name'], access_code=access[request.form['access_name']])
+                db.session.add(new_user)
+                db.session.commit()
+            except:
+                pass
+                # return render_template('login.html', warning=True)
     return render_template('manage.html', header_title='Manage Users', login='True', user='test', property='users', data=get_data('users'))
 
-@app.route('/manage/services')
+@app.route('/manage/services', methods=['GET', 'POST'])
 def manage_page_services():
+    if request.method == 'POST':
+        if request.form['submit-service'] == 'Create':
+            try:
+                # ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
+                new_service = Services(name=request.form["name"], port=request.form['port'], access_name=request.form['access_name'], access_code=access[request.form['access_name']])
+                db.session.add(new_service)
+                db.session.commit()
+            except:
+                pass
+       
     return render_template('manage.html', header_title='Manage Services', login='True', user='test', property='services', data=get_data('services'))
 
 if __name__ == '__main__':
