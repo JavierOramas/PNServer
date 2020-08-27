@@ -95,7 +95,6 @@ def check_session():
     
 @app.route('/debug')
 def debug():
-    print(session)
     if 'username' in session:
         user = escape(session['username'])
     else:
@@ -104,7 +103,12 @@ def debug():
 
 @app.route('/')
 def root():
-    return debug()
+    if 'username' in session:
+        user = escape(session['username'])
+    else:
+        user = None
+    # print(scan_network()['PNCmdr'])
+    return render_template('home.html', user=user, machines=scan_network()['PNCmdr'])
 
 #TODO return only the info corresponding to the acces of the User
 @app.route('/scan')
