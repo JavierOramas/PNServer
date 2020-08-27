@@ -121,4 +121,10 @@ footer {
 .login-box > h1 {
   color: whitesmoke; }
 
+.card-container {
+  border-radius: 20px;
+  margin: 5px;
+  text-decoration: 100%;
+  background-color: 0deg; }
+
 /*# sourceMappingURL=style.css.map */

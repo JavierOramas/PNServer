@@ -1,2 +1,14 @@
 {% extends "index.html" %}
 
+{% block body%}
+
+ <div class="container center">
+     {% for i in machines %}
+         <a class="card-container btn btn-outline-light w-25" href={{i}}>
+             <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-small center" alt="">
+             <h3>{{i}}</h3>
+         </a>
+     {% endfor %}
+ </div>
+
+{% endblock %} 

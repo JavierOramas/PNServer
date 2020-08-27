@@ -1,4 +1,6 @@
 $default-text: sans-serif;
+$round-border: 10px;
+$double-round-border: 20px;
 
 *{
     box-sizing: border-box;
@@ -41,7 +43,7 @@ body{
     margin: 10px;
     /* display: inline-flex; */
     display: inline-flex;
-    border-radius: 10px;
+    border-radius: $round-border;
 }
 
 .service-name{
@@ -137,8 +139,15 @@ footer{
     align-items: center;
     /* min-width: 5px; */
     width: max-content;
-    border-radius: 20px;
+    border-radius: $double-round-border;
 }
 .login-box > h1{
     color: whitesmoke;
+}
+
+.card-container{
+    border-radius: $double-round-border;
+    margin: 5px;
+    text-decoration: lightness($color: white);
+    // color: white;
 }
