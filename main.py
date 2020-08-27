@@ -66,7 +66,6 @@ def get_services():
     # print(final_list)
     return services
 
-#TODO return list with all the values of the table
 def get_data(property):
     if property == 'users':
         users = Users.query.all()
