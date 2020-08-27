@@ -149,5 +149,6 @@ footer{
     border-radius: $double-round-border;
     margin: 5px;
     text-decoration: lightness($color: white);
+    width: fit-content!important;
     // color: white;
 }
