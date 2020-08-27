@@ -1,24 +1,4 @@
 {% extends "index.html" %}
-
-{% block header %}
-<img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-small" alt="">
-  <div class="container page-header center">
-    <h1 class="text-center col">{{header_title}}</h1>
-  </div>
-  <div>
-    {% if user == None %}
-      <a href="\login" class='btn btn-secondary'> Login/Register</a>
-    {% endif %}
-    {% if not user == None %}
-      <a class="btn btn-outline-secondary" href="/">
-          <img src={{ url_for('static', filename='img/avatar.png')}}, alt=''>
-          <sub>
-            {{ user }}
-          </sub>
-      </a>
-    {% endif %}
-    </div>
-  {% endblock header %}
   
   {% block body %}
     <h1 class="text-center">{{ content }}</h1>
