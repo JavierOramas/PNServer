@@ -28,21 +28,21 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     pwd = db.Column(db.String(80), nullable=False)
-    access_code = db.Column(db.String(5), unique=True, nullable=False)
-    access_name = db.Column(db.String(10), unique=True, nullable=False)
+    access_code = db.Column(db.String(5), nullable=False)
+    access_name = db.Column(db.String(10), nullable=False)
     
 class Services(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
     port = db.Column(db.String(5), unique=True, nullable=False)
-    access_code = db.Column(db.String(5), unique=True, nullable=False)
-    access_name = db.Column(db.String(10), unique=True, nullable=False)
+    access_code = db.Column(db.String(5), nullable=False)
+    access_name = db.Column(db.String(10), nullable=False)
        
 class Properties(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    access_code = db.Column(db.String(5), unique=True, nullable=False)
-    access_name = db.Column(db.String(10), unique=True, nullable=False)
+    access_code = db.Column(db.String(5), nullable=False)
+    access_name = db.Column(db.String(10), nullable=False)
 
 
 def get_services():
@@ -57,7 +57,11 @@ def get_services():
     for cp,dir,files in walk('static/img/services'):
         for i in files:
             if i[:i.find('.')] in final_list:
-                services.append((i[:i.find('.')],path.join(cp,i)))
+                path_pic =path.join(cp,i)
+                if not path.exists(path_pic):
+                    path_pic = 'static/img/services/PNCmdr.png'
+                    
+                services.append((i[:i.find('.')],path_pic))
     # print(services)
     # print(final_list)
     return services
