@@ -107,7 +107,7 @@ def root():
         user = escape(session['username'])
     else:
         user = None
-    return render_template('home.html', user=user, machines=scan_network()['PNCmdr'])
+    return render_template('home.html', user=user, machines=scan_network()['PNCmdr'], header_title='Prime Networks Commander')
 
 #TODO return only the info corresponding to the acces of the User
 @app.route('/scan')
