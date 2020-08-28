@@ -13,11 +13,29 @@
 
 <body class="container login-page">
     
-    {% if warning %}
-        <div class='alert alert-warning alert-dismissable'>
-            Incorrect Credentials, Try Again. 
-        </div>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {%if messages %}
+        {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class='alert alert-success'>
+                    {{ message }}
+                </div>
+                {% endif %}
+
+                {% if category == 'warning' %}
+                <div class='alert alert-warning'>
+                    {{ message }}
+                </div>
+                {% endif %}
+
+                {% if category == 'error' %}
+                <div class='alert alert-danger'>
+                    {{ message }}
+                </div>
+                {% endif %}
+        {% endfor %}
     {% endif %}
+    {% endwith %}
     
     <header class="navbar">       
             <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-medium center" alt="">

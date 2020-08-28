@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, escape, redirect
+from flask import Flask, render_template, request, session, escape, redirect, flash
 from os import path,walk
 # from scripts.get_ip import get_ip
 from get_ip import get_ip
@@ -122,7 +122,6 @@ def return_active_services():
 @app.route('/register', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print(request.form)
         if request.form['submit'] == 'Login':
             user = Users.query.filter_by(name=request.form['username']).first()
             if user and not user.name == '' and check_password_hash( user.pwd, request.form['password']):
@@ -131,7 +130,8 @@ def login():
                 # return str("Wellcome "+str(user.name))
                 return redirect('/')
             else:
-                return render_template('login.html', warning=True)
+                flash('Wrong Credentials', 'warning')
+                return render_template('login.html')
         else:
             # print(request.form["username"])
             try:
@@ -139,12 +139,14 @@ def login():
                 new_user = Users(name=request.form["username"], pwd=ciphered_pwd, access_name='guest', access_code=0)
                 db.session.add(new_user)
                 db.session.commit()
-                return 'user Registered'
+                flash('User Registered Succesfully', 'success')
             except:
-                return render_template('login.html', warning=True)
+                flash('Registration Failed', 'error')
+   
+            return render_template('login.html')
     # if request.method == 'GET':
         
-    return render_template('login.html', warning=False)
+    return render_template('login.html')
 
 #TODO Check user access
 @app.route('/manage', methods=['GET', 'POST'])
