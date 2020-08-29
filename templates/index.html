@@ -25,13 +25,14 @@
               <h1 class="text-center col">{{header_title}}</h1>
             </div>
             <div>
-              {% if user == None %}
+              {% if user == 'guest' %}
                 <a href="\login" class='col btn btn-secondary'>Login/Register</a>
               {% endif %}
-              {% if not user == None %}
+              {% if not user == 'guest' %}
                 <div class="col">
                     <a class="btn btn-outline-secondary" href="/logout">
-                        <img src={{ url_for('static', filename='img/avatar.png')}}, alt=''>
+                        <!-- TODO Show avatar image -->
+                        <img class='logo-small' src={{ url_for('static', filename='img/avatar.png')}}, alt=''>
                         <sub>
                             {{ user }}
                         </sub>

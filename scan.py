@@ -42,7 +42,7 @@ def check_local_services(db):
     return available_services
 
 #TODO Test network Scan    
-def check_network_machines(db, user=0):
+def check_network_machines(db, user):
     
     ip = get_ip()
     services = load_services()

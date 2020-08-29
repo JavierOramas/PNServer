@@ -45,6 +45,19 @@ class Properties(db.Model):
     access_code = db.Column(db.String(5), nullable=False)
     access_name = db.Column(db.String(10), nullable=False)
 
+def loged_user():    
+    if 'username' in session:
+        return escape(session['username'])
+    else:
+        return 'guest'
+    
+def get_user_access(username):
+    user_access = 0    
+    if not username == 'guest':
+        user = Users.query.filter_by(name=username).first()
+        if user:
+            user_access = user.access_code
+    return int(user_access)
 
 
 def get_services():
@@ -88,34 +101,24 @@ def get_data(property):
     
     # return [[ 'emby', '8096'], ['PNCmdr', '2357']]
 
-def check_session():
-    print(session)
-    if 'username' in session:
-        return escape(session['username'])
-    else:
-        return None
-    
 @app.route('/debug')
 def debug():
-    if 'username' in session:
-        user = escape(session['username'])
-    else:
-        user = None
+    user = loged_user()
     return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+')', user=user ,services=get_services(), header_title='Prime Networks Server')
 
 @app.route('/')
 def root():
-    if 'username' in session:
-        user = escape(session['username'])
-    else:
-        user = None
-    check_network_machines(db, 3)
-    return render_template('home.html', user=user, machines=scan_network(3)['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(3).keys())
+    user = loged_user()
+    
+    check_network_machines(db, get_user_access(loged_user()))
+    return render_template('home.html', user=user, machines=scan_network(get_user_access(loged_user()))['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(get_user_access(user)).keys())
 
 #TODO return only the info corresponding to the acces of the User
+@app.route('/scan/<string:username>')
 @app.route('/scan')
-def scan_network(user):
-    return check_network_machines(db, user)
+def scan_network(username='guest'):
+    user_acces = get_user_access(username)
+    return check_network_machines(db, user_acces)
 
 @app.route('/services')
 def return_active_services():
@@ -129,8 +132,6 @@ def login():
             user = Users.query.filter_by(name=request.form['username']).first()
             if user and not user.name == '' and check_password_hash( user.pwd, request.form['password']):
                 session['username'] = user.name
-                # print(session)
-                # return str("Wellcome "+str(user.name))
                 return redirect('/')
             else:
                 flash('Wrong Credentials', 'warning')
@@ -153,9 +154,10 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('username')
+    if 'username' in session: 
+        session.pop('username')
     return redirect('/')
-
+    
 #TODO Check user access
 @app.route('/manage', methods=['GET', 'POST'])
 @app.route('/manage/users' , methods=['GET', 'POST'])
@@ -196,7 +198,7 @@ def init_db():
 
     services = get_data('services')
     if services == None or len(services) == 0:
-        new_service = Services(name='PNCmdr', port='2357', access_name='admin', access_code=access['admin'])
+        new_service = Services(name='PNCmdr', port='2357', access_name='admin', access_code=access['guest'])
         db.session.add(new_service)
         db.session.commit()
 
@@ -204,4 +206,5 @@ if __name__ == '__main__':
     db.create_all()
     init_db()
     os.popen("sass static/scss/style.scss:static/css/style.css")
+    session = {}
     app.run(debug=True,host=get_ip(), port=2357)
