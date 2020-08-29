@@ -73,7 +73,11 @@
                 <form method="POST" class="form form-edit-entry" >
                     <input type="text" class="form-control" id='name' name="name">
                     <input type="text" class="form-control" id='password' name="password">
-                    <input type="text" class="form-control" id='access_name' name="access_name">
+                    <select class="form-control dropdown" id='access_name' name='access_name'>
+                        {% for i in user_categories %}
+                            <option>{{i}}</option>
+                        {% endfor %}
+                    </select>
                     <input type="submit" class="form-contol" id='sumbit' name="submit-user" value="Create">
                     <input type="submit" class="form-contol" id='sumbit' name="submit-user" value="Save">
                 </form>
@@ -82,7 +86,11 @@
                 <form method="POST" class="form form-add-entry" >
                     <input type="text" class="form-control" id='name' name="name">
                     <input type="text" class="form-control" id='port' name="port">
-                    <input type="text" class="form-control" id='access_name' name="access_name">
+                    <select class="form-control dropdown" id='access_name' name='access_name'>
+                        {% for i in user_categories %}
+                            <option>{{i}}</option>
+                        {% endfor %}
+                    </select>
                     <input type="submit" class="form-contol" id='sumbit' name="submit-service" value="Create">
                     <input type="submit" class="form-contol" id='sumbit' name="submit-service" value="Save">
                 </form>

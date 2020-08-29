@@ -164,13 +164,13 @@ def manage_page_users():
         if request.form['submit-user'] == 'Create':
             try:
                 ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-                new_user = Users(name=request.form["name"], pwd=ciphered_pwd, access_name=request.form['access_name'], access_code=access[request.form['access_name']])
+                new_user = Users(name=request.form["name"], pwd=ciphered_pwd, access_name=request.form['access_name'], access_code=access[request.form['access_name']], user_categories = access.keys())
                 db.session.add(new_user)
                 db.session.commit()
             except:
                 pass
                 # return render_template('login.html', warning=True)
-    return render_template('manage.html', header_title='Manage Users', login='True', user='test', property='users', data=get_data('users'))
+    return render_template('manage.html', header_title='Manage Users', login='True', user='test', property='users', data=get_data('users'),  user_categories = access.keys())
 
 @app.route('/manage/services', methods=['GET', 'POST'])
 def manage_page_services():
@@ -178,13 +178,13 @@ def manage_page_services():
         if request.form['submit-service'] == 'Create':
             try:
                 # ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-                new_service = Services(name=request.form["name"], port=request.form['port'], access_name=request.form['access_name'], access_code=access[request.form['access_name']])
+                new_service = Services(name=request.form["name"], port=request.form['port'], access_name=request.form['access_name'], access_code=access[request.form['access_name']], user_categories = access.keys())
                 db.session.add(new_service)
                 db.session.commit()
             except:
                 pass
        
-    return render_template('manage.html', header_title='Manage Services', login='True', user='test', property='services', data=get_data('services'))
+    return render_template('manage.html', header_title='Manage Services', login='True', user='test', property='services', data=get_data('services'),  user_categories = access.keys())
 
 def init_db():
     users = get_data('users')

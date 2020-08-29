@@ -70,9 +70,7 @@ def check_network_machines(db, user=0):
     available_services = {}
     
     for i in all_services:
-        print(services[i][3])
         if int(services[i][3]) <= user:
-            # print(i)
             available_services[i] = all_services[i]
     
     with open('all_available_services.json', 'w') as json_file:
