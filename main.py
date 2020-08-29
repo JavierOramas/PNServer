@@ -5,6 +5,7 @@ from get_ip import get_ip
 from scan import load_services, check_local_services, check_network_machines
 from flask_sqlalchemy import sqlalchemy,SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from dbmodel import Users, Properties, Services
 # from dbmodel import Users
 
 import os
@@ -21,7 +22,7 @@ access = {
     'guest':0,
     'user':1,
     'admin':2,
-    'super admin':3 
+    'super_admin':3 
 }
 
 class Users(db.Model):
@@ -43,6 +44,7 @@ class Properties(db.Model):
     name = db.Column(db.String(50), unique=True, nullable=False)
     access_code = db.Column(db.String(5), nullable=False)
     access_name = db.Column(db.String(10), nullable=False)
+
 
 
 def get_services():
@@ -84,7 +86,7 @@ def get_data(property):
     else:
         pass
     
-    return [[ 'emby', '8096'], ['PNCmdr', '2357']]
+    # return [[ 'emby', '8096'], ['PNCmdr', '2357']]
 
 def check_session():
     print(session)
@@ -107,6 +109,7 @@ def root():
         user = escape(session['username'])
     else:
         user = None
+    check_network_machines(db)
     return render_template('home.html', user=user, machines=scan_network()['PNCmdr'], header_title='Prime Networks Commander', services=scan_network().keys())
 
 #TODO return only the info corresponding to the acces of the User
@@ -148,6 +151,11 @@ def login():
         
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('username')
+    return redirect('/')
+
 #TODO Check user access
 @app.route('/manage', methods=['GET', 'POST'])
 @app.route('/manage/users' , methods=['GET', 'POST'])
@@ -178,8 +186,22 @@ def manage_page_services():
        
     return render_template('manage.html', header_title='Manage Services', login='True', user='test', property='services', data=get_data('services'))
 
+def init_db():
+    users = get_data('users')
+    if users == None or len(users) == 0:
+        ciphered_pwd = generate_password_hash('toor', method='sha256')
+        new_user = Users(name='god', pwd=ciphered_pwd, access_name='super_admin', access_code=access['super_admin'])
+        db.session.add(new_user)
+        db.session.commit()
+
+    services = get_data('services')
+    if services == None or len(services) == 0:
+        new_service = Services(name='PNCmdr', port='2357', access_name='admin', access_code=access['admin'])
+        db.session.add(new_service)
+        db.session.commit()
+
 if __name__ == '__main__':
     db.create_all()
-    
+    init_db()
     os.popen("sass static/scss/style.scss:static/css/style.css")
     app.run(debug=True,host=get_ip(), port=2357)
