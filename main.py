@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, escape, redirect, flash
+from flask import Flask, render_template, request, session, escape, redirect, flash, url_for
 from os import path,walk
 # from scripts.get_ip import get_ip
 from get_ip import get_ip
@@ -107,7 +107,7 @@ def root():
         user = escape(session['username'])
     else:
         user = None
-    return render_template('home.html', user=user, machines=scan_network()['PNCmdr'], header_title='Prime Networks Commander')
+    return render_template('home.html', user=user, machines=scan_network()['PNCmdr'], header_title='Prime Networks Commander', services=scan_network().keys())
 
 #TODO return only the info corresponding to the acces of the User
 @app.route('/scan')

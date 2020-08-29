@@ -2,13 +2,28 @@
 
 {% block body%}
 
- <div class="container center">
-     {% for i in machines %}
-         <a class="card-container btn btn-outline-light w-25" href={{i}}>
-             <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-small center" alt="">
-             <h3>{{i}}</h3>
-         </a>
-     {% endfor %}
- </div>
+<h1 class="text-capitalize">Network Machines</h1>
+<div class="container center">
+    {% for i in machines %}
+        <a class="card-container btn btn-outline-light w-25" href={{i}}>
+            <img src={{ url_for('static', filename='img/logo.png' )  }} class="logo-small center" alt="">
+            <h3>{{i}}</h3>
+        </a>
+    {% endfor %}
+</div>
+
+<h1 class="text-capitalize">Services</h1>
+<div class="container center">
+    {% for i in services %}
+        <a class="card-container btn btn-outline-light w-25" href={{i}}>
+            {% with path = 'img/services/'+i+'.png' %}
+                {% with pic = url_for('static', filename=path) %}    
+                    <img src={{url_for('static', filename=path)}} onerror="this.onerror = null; this.src='../static/img/logo.png';" class="logo-small center" alt="">
+                    <h3>{{i}}</h3>
+                {% endwith %}
+            {% endwith %}
+        </a>
+    {% endfor %}
+</div>
 
 {% endblock %} 
