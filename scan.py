@@ -12,7 +12,7 @@ def load_services():
     columns = Services.__table__.columns
     final_list = {}
     for i in services:
-        final_list[i.name] = [i.id, i.name, i.port]
+        final_list[i.name] = [i.id, i.name, i.port, i.access_code]
     return final_list
 
 available_services = {}
@@ -42,7 +42,7 @@ def check_local_services(db):
     return available_services
 
 #TODO Test network Scan    
-def check_network_machines(db):
+def check_network_machines(db, user=0):
     
     ip = get_ip()
     services = load_services()
@@ -66,7 +66,16 @@ def check_network_machines(db):
                             all_services[i].append(j)
         except:
             continue
+    
+    available_services = {}
+    
+    for i in all_services:
+        print(services[i][3])
+        if int(services[i][3]) <= user:
+            # print(i)
+            available_services[i] = all_services[i]
+    
     with open('all_available_services.json', 'w') as json_file:
-        json.dump(all_services, json_file)    
-    return all_services
+        json.dump(available_services, json_file)    
+    return available_services
 

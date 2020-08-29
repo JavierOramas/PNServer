@@ -109,17 +109,17 @@ def root():
         user = escape(session['username'])
     else:
         user = None
-    check_network_machines(db)
-    return render_template('home.html', user=user, machines=scan_network()['PNCmdr'], header_title='Prime Networks Commander', services=scan_network().keys())
+    check_network_machines(db, 3)
+    return render_template('home.html', user=user, machines=scan_network(3)['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(3).keys())
 
 #TODO return only the info corresponding to the acces of the User
 @app.route('/scan')
-def scan_network():
-    return check_network_machines(db)
+def scan_network(user):
+    return check_network_machines(db, user)
 
 @app.route('/services')
 def return_active_services():
-    return check_local_services()
+    return check_local_services(db)
 
 @app.route('/login', methods=['GET', 'POST'])
 @app.route('/register', methods=['GET', 'POST'])
