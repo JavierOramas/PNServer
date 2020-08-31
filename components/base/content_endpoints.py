@@ -8,7 +8,7 @@ from get_ip import get_ip
 from scan import load_services, check_local_services, check_network_machines
 from dbmodel import Users, Properties, Services, db
 
-## Static 
+## Static ##################################################################################################### 
 access = {
     'guest':0,
     'user':1,
@@ -17,7 +17,8 @@ access = {
 }
 
 session = {}
-## User
+
+## User #######################################################################################################
 
 def logout():
     if 'username' in session: 
@@ -49,7 +50,8 @@ def login():
     # if request.method == 'GET':
         
     return render_template('login.html')
-##Content 
+
+## Content ####################################################################################################### 
 def debug():
     user = loged_user()
     return render_template('server_up.html',title='Debug', content='Server is Up!', paragraph='The Server is Up and running ('+get_ip()+')', user=user ,services=get_services(), header_title='Prime Networks Server')
@@ -60,13 +62,13 @@ def root():
     check_network_machines(db, get_user_access(loged_user()))
     return render_template('home.html', user=user, machines=scan_network(get_user_access(loged_user()))['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(get_user_access(user)).keys())
 
-## Data
+## Data #########################################################################################################
 
 def scan_network(username='guest'):
     user_acces = get_user_access(username)
     return check_network_machines(db, user_acces)
 
-## Manage
+## Manage #######################################################################################################
 
 def manage_page_users():
     if request.method == 'POST':
@@ -94,8 +96,7 @@ def manage_page_services():
        
     return render_template('manage.html', header_title='Manage Services', login='True', user='test', property='services', data=get_data('services'),  user_categories = access.keys())
 
-## Tools
-
+## Tools #######################################################################################################
 
 def loged_user():    
     if 'username' in session:
