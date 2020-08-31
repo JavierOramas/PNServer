@@ -50,18 +50,24 @@
     <div class="container-fluid row">
         <table class="col" style="margin: 5px; width:fit-content">
             <tbody class="table table-responsive table-active bg-dark text-light text-white">
-                {% for i in data%}
+                {% for i in data %}
                 <tr class="table text-white">
-                    {% for j in i%}
+                    {% for j in i %}
                     <td class="manage-item">
                         {{j}}
                     </td>
                     {% endfor %}
                     <td class='table text-white table-hover'>
                         <!-- TODO make this select the entry to edit it -->
-                        <button class='btn btn-outline-secondary' onclick=''>
+                        <a class='btn btn-outline-secondary' href='/edit//{{property}}/{{i[0]}}'>
                             edit 
-                        </button>
+                        </a>
+                    </td>
+                    <td class='table text-white table-hover'>
+                        <!-- TODO make this a post request -->
+                        <a class='btn btn-outline-secondary' href='/delete/{{property}}/{{i[0]}}'>
+                            delete
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
