@@ -83,7 +83,7 @@
                     <select class="form-control dropdown" id='access_name' name='access_name'>
                         {% for i in user_categories %}
                             {% if i == selected.access_name %}
-                                <option class="active" value="active" selected>{{i}}</option>
+                                <option class="active" selected>{{i}}</option>
                             {% endif %}
                             {% if not i == selected.access_name %}
                                 <option>{{i}}</option>
@@ -96,13 +96,13 @@
             {% endif %}
             {% if  property == 'services' %}
                 <form method="POST" class="form form-add-entry" >
-                    <input type="text" class="form-control" id='name' name="name">
-                    <input type="text" class="form-control" id='port' name="port">
-                    <input type="hidden" class="hidden-id" id='id' name="id">
+                    <input type="text" class="form-control" id='name' name="name" value={{selected.name}}>
+                    <input type="text" class="form-control" id='port' name="port" value={{selected.port}}>
+                    <input type="hidden" class="hidden-id" id='id' name="id" value={{selected.id}}>
                     <select class="form-control dropdown" id='access_name' name='access_name'>
                         {% for i in user_categories %}
                            {% if i == selected.access_name %}
-                                <option class="active" value="active" selected>{{i}}</option>
+                                <option class="active" selected>{{i}}</option>
                             {% endif %}
                             {% if not i == selected.access_name %}
                                 <option>{{i}}</option>

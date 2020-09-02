@@ -110,7 +110,6 @@ def edit_entry(table, id):
     
     if request.method == 'POST':
         if table == 'users':
-            
             # try:
             item_id = request.form['id']
             usr = Users.query.filter_by(id=item_id).first()
@@ -123,14 +122,17 @@ def edit_entry(table, id):
             # db.session.add(usr)
             db.session.commit()
     
-        if request.form['save-service'] == 'Save':
-            # try:
-            ciphered_pwd = generate_password_hash(request.form["password"], method='sha256')
-            new_service = Services(name=request.form["name"], port=request.form['port'], access_name=request.form['access_name'], access_code=access[request.form['access_name']])
-            db.session.add(new_service)
+        if table == 'services':
+            item_id = request.form['id']
+            usr = Services.query.filter_by(id=item_id).first()
+            usr.name = request.form['name']
+            usr.port = request.form['port']
+            usr.access_name = request.form['access_name']
+            usr.access_code = access[request.form['access_name']]
+            # db.session.add(usr)
             db.session.commit()
-            # except:
-                # pass
+        return redirect('/manage/'+table)
+     
     if table == 'users':
         element = Users.query.get(id)
     if table == 'services':
