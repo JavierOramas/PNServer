@@ -59,7 +59,7 @@
                     {% endfor %}
                     <td class='table text-white table-hover'>
                         <!-- TODO make this select the entry to edit it -->
-                        <a class='btn btn-outline-secondary' href='/edit//{{property}}/{{i[0]}}'>
+                        <a class='btn btn-outline-secondary' href='/edit/{{property}}/{{i[0]}}'>
                             edit 
                         </a>
                     </td>
@@ -77,24 +77,36 @@
         <div class="col container">
             {% if  property == 'users' %}
                 <form method="POST" class="form form-edit-entry" >
-                    <input type="text" class="form-control" id='name' name="name">
-                    <input type="text" class="form-control" id='password' name="password">
+                    <input type="text" class="form-control" id='name' name="name" value={{selected.name}}>
+                    <input type="text" class="form-control" id='password' name="password"  value={{selected.pwd}}>
+                    <input type="hidden" class="hidden-id" id='id' name="id" value={{selected.id}}>
                     <select class="form-control dropdown" id='access_name' name='access_name'>
                         {% for i in user_categories %}
-                            <option>{{i}}</option>
+                            {% if i == selected.access_name %}
+                                <option class="active" value="active" selected>{{i}}</option>
+                            {% endif %}
+                            {% if not i == selected.access_name %}
+                                <option>{{i}}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <input type="submit" class="form-contol" id='sumbit' name="submit-user" value="Create">
-                    <input type="submit" class="form-contol" id='sumbit' name="submit-user" value="Save">
+                    <input type="submit" class="form-contol" id='sumbit' name="save-user" value="Save">
                 </form>
             {% endif %}
             {% if  property == 'services' %}
                 <form method="POST" class="form form-add-entry" >
                     <input type="text" class="form-control" id='name' name="name">
                     <input type="text" class="form-control" id='port' name="port">
+                    <input type="hidden" class="hidden-id" id='id' name="id">
                     <select class="form-control dropdown" id='access_name' name='access_name'>
                         {% for i in user_categories %}
-                            <option>{{i}}</option>
+                           {% if i == selected.access_name %}
+                                <option class="active" value="active" selected>{{i}}</option>
+                            {% endif %}
+                            {% if not i == selected.access_name %}
+                                <option>{{i}}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <input type="submit" class="form-contol" id='sumbit' name="submit-service" value="Create">
