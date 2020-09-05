@@ -1,3 +1,4 @@
+[![HitCount](http://hits.dwyl.com/JavierOramas/PNServer.svg)](http://hits.dwyl.com/JavierOramas/PNServer)
 # Prime Networks Comander Server
 
 ## What is PNCmdr?
