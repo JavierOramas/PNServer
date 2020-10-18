@@ -26,4 +26,18 @@
     {% endfor %}
 </div>
 
+<h1 class="text-capitalize">Local Services</h1>
+<div class="container center">
+    {% for i in local_services %}
+        <a class="card-container btn btn-outline-light w-25" href={{local_services[i][0]}}>
+            {% with path = 'img/services/'+i+'.png' %}
+                {% with pic = url_for('static', filename=path) %}    
+                    <img src={{url_for('static', filename=path)}} onerror="this.onerror = null; this.src='../static/img/logo.png';" class="logo-small center" alt="">
+                    <h3>{{i}}</h3>
+                {% endwith %}
+            {% endwith %}
+        </a>
+    {% endfor %}
+</div>
+
 {% endblock %} 

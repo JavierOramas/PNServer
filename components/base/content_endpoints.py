@@ -60,7 +60,7 @@ def root():
     user = loged_user()
     
     check_network_machines(db, get_user_access(loged_user()))
-    return render_template('home.html', user=user, machines=scan_network(get_user_access(loged_user()))['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(get_user_access(user)).keys())
+    return render_template('home.html', user=user, machines=scan_network(get_user_access(loged_user()))['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(get_user_access(user)).keys(), local_services = check_local_services(db))
 
 def get_machines_service(service:str):
     machines = get_machines_service_api(service)
