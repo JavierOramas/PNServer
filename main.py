@@ -1,11 +1,12 @@
 
 import os
 
+from flask import redirect
 from get_ip import get_ip
 from scan import load_services, check_local_services, check_network_machines
 from dbmodel import Users, Properties, Services, app, db
 
-from components.base.content_endpoints import debug, root, logout, login, scan_network
+from components.base.content_endpoints import debug, root, logout, login, scan_network, get_machines_service
 from components.base.content_endpoints import manage_page_users, manage_page_services, loged_user
 from components.base.content_endpoints import get_user_access, get_services, get_data, init_db, delete_entry
 from components.base.content_endpoints import edit_entry, delete_entry
@@ -38,6 +39,11 @@ def route_logout():
     return logout() 
     
 #TODO Check user access
+
+@app.route('/<string:service>')
+def redirect_service(service:str):
+    return get_machines_service(service)
+    
 @app.route('/manage', methods=['GET', 'POST'])
 @app.route('/manage/users' , methods=['GET', 'POST'])
 def route_manage_users():

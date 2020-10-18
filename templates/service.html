@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block body%}
+
+<h1 class="text-capitalize">Network Machines</h1>
+<div class="container center">
+    {% for i in machines %}
+        <a class="card-container btn btn-outline-light w-25" href={{i}}>
+        {% with path = 'img/services/'+service+'.png' %}
+            <img src={{ url_for('static', filename=path )  }} class="logo-small center" alt="">
+            <h3>{{i}}</h3>
+        {% endwith %}
+        </a>
+    {% endfor %}
+</div>
+
+{% endblock %} 

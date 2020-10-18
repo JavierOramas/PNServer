@@ -62,11 +62,16 @@ def root():
     check_network_machines(db, get_user_access(loged_user()))
     return render_template('home.html', user=user, machines=scan_network(get_user_access(loged_user()))['PNCmdr'], header_title='Prime Networks Commander', services=scan_network(get_user_access(user)).keys())
 
+def get_machines_service(service:str):
+    machines = get_machines_service_api(service)
+    return render_template('service.html', user=loged_user(), machines=machines, service=service, header_title=f'Prime Networks Commander - {service}')
+
 ## Data #########################################################################################################
 
 def scan_network(username='guest'):
     user_acces = get_user_access(username)
     return check_network_machines(db, user_acces)
+
 
 ## Manage #######################################################################################################
 
@@ -176,6 +181,11 @@ def get_services():
     # print(services)
     # print(final_list)
     return services
+
+def get_machines_service_api(service:str):
+    services = scan_network(username=loged_user())
+    return [i for i in services[service]]
+
 
 def get_data(property):
     if property == 'users':
